@@ -130,12 +130,9 @@ namespace BHVet.Tests
     public void GetPatients_RetrievesAllPatientsWithVet_PatientList()
     {
       //Arrange, Act
-      DateTime dob = new DateTime(1986, 12, 5);
-
-      Console.WriteLine(dob);
-
       Vet testVet = new Vet("Doctor Phil", "Headstuff");
       testVet.Save();
+      DateTime dob = new DateTime(1986, 12, 5);
       Patient firstPatient = new Patient("Larry", "hernia", "bird", dob);
       firstPatient.Save();
       testVet.AddPatient(firstPatient);

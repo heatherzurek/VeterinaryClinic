@@ -159,5 +159,28 @@ namespace BHVet.Models
       return vets;
     }
 
+    public void AddVet(Vet newVet)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"INSERT INTO appts (vet_id, patient_id) VALUES (@VetId, @PatientId);";
+      MySqlParameter vet_id = new MySqlParameter();
+      vet_id.ParameterName = "@VetId";
+      vet_id.Value = newVet.Id;
+      cmd.Parameters.Add(vet_id);
+      MySqlParameter patient_id = new MySqlParameter();
+      patient_id.ParameterName = "@PatientId";
+      patient_id.Value = Id;
+      cmd.Parameters.Add(patient_id);
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if(conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
+
   }
 }

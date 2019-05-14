@@ -52,7 +52,7 @@ namespace BHVet.Tests
       testVet.Save();
 
       //Act
-      Vet foundVet = Vet.Find(testVet.GetId());
+      Vet foundVet = Vet.Find(testVet.Id);
 
       //Assert
       Assert.AreEqual(testVet, foundVet);
@@ -74,7 +74,7 @@ namespace BHVet.Tests
     }
 
     [TestMethod]
-    public void GetAll_CategoriesEmptyAtFirst_List()
+    public void GetAll_VetsEmptyAtFirst_List()
     {
       //Arrange, Act
       int result = Vet.GetAll().Count;
@@ -119,8 +119,8 @@ namespace BHVet.Tests
       //Act
       Vet savedVet = Vet.GetAll()[0];
 
-      int result = savedVet.GetId();
-      int testId = testVet.GetId();
+      int result = savedVet.Id;
+      int testId = testVet.Id;
 
       //Assert
       Assert.AreEqual(testId, result);
@@ -130,12 +130,14 @@ namespace BHVet.Tests
     public void GetPatients_RetrievesAllPatientsWithVet_PatientList()
     {
       //Arrange, Act
+      DateTime dob = new DateTime(1986, 12, 5);
+
       Vet testVet = new Vet("Doctor Phil", "Headstuff");
       testVet.Save();
-      Patient firstPatient = new Patient("Mow the lawn");
+      Patient firstPatient = new Patient("Larry", "hernia", "bird", dob);
       firstPatient.Save();
       testVet.AddPatient(firstPatient);
-      Patient secondPatient = new Patient("Do the dishes");
+      Patient secondPatient = new Patient("barry", "hernia", "bird", dob);
       secondPatient.Save();
       testVet.AddPatient(secondPatient);
       List<Patient> testPatientList = new List<Patient> {firstPatient, secondPatient};
@@ -151,7 +153,8 @@ namespace BHVet.Tests
     public void Delete_DeletesVetAssociationsFromDatabase_VetList()
     {
       //Arrange
-      Patient testPatient = new Patient("Mow the lawn");
+      DateTime dob = new DateTime(1986, 12, 5);
+      Patient testPatient = new Patient("Larry", "hernia", "bird", dob);
       testPatient.Save();
       string testName = "Home stuff";
       Vet testVet = new Vet("Doctor Phil", "Headstuff");
@@ -160,22 +163,23 @@ namespace BHVet.Tests
       //Act
       testVet.AddPatient(testPatient);
       testVet.Delete();
-      List<Vet> resultPatientCategories = testPatient.GetCategories();
-      List<Vet> testPatientCategories = new List<Vet> {};
+      List<Vet> resultPatientVets = testPatient.GetVets();
+      List<Vet> testPatientVets = new List<Vet> {};
 
       //Assert
-      CollectionAssert.AreEqual(testPatientCategories, resultPatientCategories);
+      CollectionAssert.AreEqual(testPatientVets, resultPatientVets);
     }
 
     [TestMethod]
     public void Test_AddPatient_AddsPatientToVet()
     {
       //Arrange
+      DateTime dob = new DateTime(1986, 12, 5);
       Vet testVet = new Vet("Doctor Phil", "Headstuff");
       testVet.Save();
-      Patient testPatient = new Patient("Mow the lawn");
+      Patient testPatient = new Patient("Larry", "hernia", "bird", dob);
       testPatient.Save();
-      Patient testPatient2 = new Patient("Water the garden");
+      Patient testPatient2 = new Patient("Jim", "ugly", "cow", dob);
       testPatient2.Save();
 
       //Act
@@ -192,11 +196,12 @@ namespace BHVet.Tests
     public void GetPatients_ReturnsAllVetPatients_PatientList()
     {
       //Arrange
+      DateTime dob = new DateTime(1986, 12, 5);
       Vet testVet = new Vet("Doctor Phil", "Headstuff");
       testVet.Save();
-      Patient testPatient1 = new Patient("Mow the lawn");
+      Patient testPatient1 = new Patient("Larry", "hernia", "bird", dob);
       testPatient1.Save();
-      Patient testPatient2 = new Patient("Buy plane ticket");
+      Patient testPatient2 = new Patient("Jim", "ugly", "cow", dob);
       testPatient2.Save();
 
       //Act

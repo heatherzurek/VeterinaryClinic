@@ -1,8 +1,8 @@
 using System;
 using MySql.Data.MySqlClient;
-using ToDoList;
+using BHVet;
 
-namespace ToDoList.Models
+namespace BHVet.Models
 {
   public class DB
   {

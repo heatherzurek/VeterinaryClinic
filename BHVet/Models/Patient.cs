@@ -167,6 +167,7 @@ namespace BHVet.Models
       cmd.CommandText = @"INSERT INTO appts (vet_id, patient_id) VALUES (@VetId, @PatientId);";
       MySqlParameter vet_id = new MySqlParameter();
       vet_id.ParameterName = "@VetId";
+      Console.WriteLine(newVet.Id);
       vet_id.Value = newVet.Id;
       cmd.Parameters.Add(vet_id);
       MySqlParameter patient_id = new MySqlParameter();

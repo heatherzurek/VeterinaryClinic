@@ -1,0 +1,30 @@
+@using BHVet.Models;
+
+<h2>Patient: @Model["selectedPatient"].Name</h2>
+<hr />
+
+@if (@Model["patientVets"].Count != 0)
+{
+  <h4>This patient has these vets:</h4>
+  <ul>
+    @foreach (Vet vet in @Model["patientVets"])
+    {
+      <li>@vet.Name</li>
+    }
+  </ul>
+}
+
+<h4>Add a vet to this patient:</h4>
+
+<form action='/patients/@Model["selectedPatient"].Id/categories/new' method='post'>
+  <label for='vetId'>Select a vet</label>
+  <select id='vetId' name='vetId' type='text'>
+    @foreach (var vet in @Model["allVets"])
+    {
+      <option value='@vet.Id'>@vet.Name</option>
+    }
+  </select>
+  <button type='submit'>Add</button>
+</form>
+
+<p><a href="/">Return to Main Page</a></p>

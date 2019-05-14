@@ -29,8 +29,8 @@ namespace BHVet.Models
       cmd.Parameters.Add(name);
 
       MySqlParameter specialty = new MySqlParameter();
-      name.ParameterSpecialty = "@specialty";
-      name.Value = this.Specialty;
+      specialty.ParameterName = "@specialty";
+      specialty.Value = this.Specialty;
       cmd.Parameters.Add(specialty);
 
       cmd.ExecuteNonQuery();

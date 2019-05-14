@@ -11,7 +11,7 @@ namespace BHVet.Tests
 
     public VetTest()
     {
-      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=bhvet_test;";
+      DBConfiguration.ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=bhvet_test;Convert Zero Datetime=True";
     }
 
     public void Dispose()
@@ -88,7 +88,7 @@ namespace BHVet.Tests
     {
       //Arrange, Act
       Vet firstVet = new Vet("Doctor Bill", "Buttstuff");
-      Vet secondVet = new Vet("Doctor Phil", "Headstuff");
+      Vet secondVet = new Vet("Doctor Bill", "Buttstuff");
 
       //Assert
       Assert.AreEqual(firstVet, secondVet);
@@ -132,6 +132,8 @@ namespace BHVet.Tests
       //Arrange, Act
       DateTime dob = new DateTime(1986, 12, 5);
 
+      Console.WriteLine(dob);
+
       Vet testVet = new Vet("Doctor Phil", "Headstuff");
       testVet.Save();
       Patient firstPatient = new Patient("Larry", "hernia", "bird", dob);
@@ -141,9 +143,7 @@ namespace BHVet.Tests
       secondPatient.Save();
       testVet.AddPatient(secondPatient);
       List<Patient> testPatientList = new List<Patient> {firstPatient, secondPatient};
-      Console.WriteLine(testPatientList.Count);
       List<Patient> resultPatientList = testVet.GetPatients();
-      Console.WriteLine(resultPatientList.Count);
 
       //Assert
       CollectionAssert.AreEqual(testPatientList, resultPatientList);

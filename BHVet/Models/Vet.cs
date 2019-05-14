@@ -120,7 +120,7 @@ namespace BHVet.Models
         conn.Open();
         MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
         cmd.CommandText = @"SELECT patients.* FROM vets
-            JOIN appts ON (vets.id = appts.vets_id)
+            JOIN appts ON (vets.id = appts.vet_id)
             JOIN patients ON (appts.patient_id = patients.id)
             WHERE vets.id = @VetId;";
         MySqlParameter vetIdParameter = new MySqlParameter();

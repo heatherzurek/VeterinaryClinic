@@ -44,7 +44,7 @@ namespace BHVet
 
   public static class DBConfiguration
   {
-    public static string ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=bhvet;";
+    public static string ConnectionString = "server=localhost;user id=root;password=root;port=8889;database=bhvet;Convert Zero Datetime=True";
   }
 
 }

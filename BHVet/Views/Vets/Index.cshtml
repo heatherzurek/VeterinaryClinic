@@ -1,0 +1,18 @@
+<h1>Puppy Surgery Clinic</h1>
+<hr />
+<h2>Veternarians:</h2>
+
+@if (@Model.Count == 0)
+{
+  <h3>No veterinarians have been added yet!</h3>
+}
+
+<ul>
+  @foreach (var vet in Model)
+  {
+    <li><a href='/vets/@vet.Id'>@vet.Name</a></li>
+  }
+</ul>
+
+<h4><a href="/vets/new">Add a new vet</a></h4>
+<h4><a href="/">Return home</a></h4>

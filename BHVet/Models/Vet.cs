@@ -10,10 +10,10 @@ namespace BHVet.Models
     public string Name { get; set; }
     public string Specialty { get; set; }
 
-    public Vet(string name, string speciality, int id = 0)
+    public Vet(string name, string specialty, int id = 0)
     {
       Name = name;
-      Specialty = speciality;
+      Specialty = specialty;
       Id = id;
     }
 
@@ -22,11 +22,17 @@ namespace BHVet.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO vets (name) VALUES (@name);";
+      cmd.CommandText = @"INSERT INTO vets (name, specialty) VALUES (@name, @specialty);";
       MySqlParameter name = new MySqlParameter();
       name.ParameterName = "@name";
       name.Value = this.Name;
       cmd.Parameters.Add(name);
+
+      MySqlParameter specialty = new MySqlParameter();
+      name.ParameterSpecialty = "@specialty";
+      name.Value = this.Specialty;
+      cmd.Parameters.Add(specialty);
+
       cmd.ExecuteNonQuery();
       Id = (int) cmd.LastInsertedId;
       conn.Close();

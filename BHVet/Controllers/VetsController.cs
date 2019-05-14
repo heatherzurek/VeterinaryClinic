@@ -43,14 +43,14 @@ namespace BHVet.Controllers
         return View(model);
     }
 
-    // [HttpPost("/vets/{vetId}/patients/new")]
-    // public ActionResult AddPatient(int vetId, int itemId)
-    // {
-    //   Vet vet = Vet.Find(vetId);
-    //   Patient item = Patient.Find(itemId);
-    //   vet.AddPatient(item);
-    //   return RedirectToAction("Show",  new { id = vetId });
-    // }
+    [HttpPost("/vets/{vetId}/patients/new")]
+    public ActionResult AddPatient(int vetId, int patientId)
+    {
+      Vet vet = Vet.Find(vetId);
+      Patient patient = Patient.Find(patientId);
+      vet.AddPatient(patient);
+      return RedirectToAction("Show",  new { id = vetId });
+    }
 
   }
 }
